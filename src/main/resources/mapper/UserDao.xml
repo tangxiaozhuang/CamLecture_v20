@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.camLecture.dao.IUserDao">
+
+    <select id="selectUserByEmail" resultType="User" parameterType="user">
+        SELECT * FROM user WHERE email = #{email} and role=#{role}
+    </select>
+
+    <select id="getUser" resultType="User" parameterType="User">
+        SELECT * FROM user WHERE email = #{email} AND password=#{password}
+    </select>
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO `user`(email,
+                         password,
+                         username,
+                         role,
+                         status,
+                          regTime,
+                          city,
+                          school
+                          ) VALUES (  #{email},
+                                      #{password},
+                                      #{username},
+                                      #{role},
+                                      #{status},
+                                      #{regTime},
+                                      #{city},
+                                      #{school});
+    </insert>
+
+
+    <delete id="delete"  parameterType="String">
+        DELETE from user WHERE  Id=#{id}
+    </delete>
+
+
+    <update id="update">
+        UPDATE user SET
+            password=#{password},
+            username=#{username},
+            status=#{status},
+            city=#{city},
+            school=#{school}
+
+        WHERE email=#{email}
+    </update>
+</mapper>

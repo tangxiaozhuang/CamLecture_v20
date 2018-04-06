@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.camLecture.dao.IApplyProgressDao">
+
+
+    <select id="getAllPro" resultType="ApplyProgress" parameterType="ApplyProgress">
+        SELECT * from applyProgress_t WHERE  userId=#{userId}
+    </select>
+
+    <select id="getPro" resultType="ApplyProgress" parameterType="ApplyProgress">
+        SELECT * from applyProgress_t WHERE  userId=#{userId} AND progress!=0 AND progress!=7 AND companyId=#{companyId} AND applyPosition =#{applyPosition}
+    </select>
+
+    <select id="selectPro" resultType="ApplyProgress" parameterType="long">
+        SELECT * FROM applyProgress_t WHERE id=#{id}
+    </select>
+
+    <delete id="delete"  parameterType="long">
+        DELETE from applyProgress_t WHERE  Id=#{id}
+    </delete>
+
+    <update id="update" parameterType="ApplyProgress">
+        UPDATE applyProgress_t SET
+            applyTitle=#{applyTitle},
+            applyPosition=#{applyPosition},
+            progress=#{progress},
+            ref=#{ref},
+            ref1=#{ref1}
+        WHERE id=#{id}
+
+    </update>
+
+    <insert id="insertPro">
+        INSERT INTO applyProgress_t(
+        userId,
+        applyTitle,
+        applyPosition,
+        company,
+        companyId,
+        progress,
+        ref,
+        ref1
+        )VALUES (
+        #{userId},
+        #{applyTitle},
+        #{applyPosition},
+        #{company},
+        #{companyId},
+        #{progress},
+        #{ref},
+        #{ref1}
+        )
+    </insert>
+</mapper>

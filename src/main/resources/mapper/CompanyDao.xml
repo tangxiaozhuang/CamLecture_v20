@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.camLecture.dao.ICompanyDao">
+
+    <select id="selectCompany" resultType="Company" parameterType="long">
+        SELECT * FROM Company WHERE id = #{id}
+    </select>
+        <select id="getCompany" resultType="Company" parameterType="Company">
+            SELECT * FROM Company WHERE comName = #{comName}
+        </select>
+
+    <delete id="delete"  parameterType="long">
+        DELETE from Company WHERE  Id=#{id}
+    </delete>
+
+        <select id="getAllCom" resultType="Company" >
+            SELECT * FROM Company
+        </select>
+
+    <update id="update">
+         update Company set
+               comName=#{comName} ,
+               webSite=#{webSite},
+               comIntroduct=#{comIntroduct},
+               position=#{position}
+               logoImg=#{logoImg}
+         where id=#{id}
+    </update>
+
+        <insert id="insert">
+            INSERT INTO Company(
+                comName,
+                webSite,
+                comIntroduct,
+                position,
+                logoImg
+            )VALUES (
+                #{comName},
+                #{webSite},
+                #{comIntroduct},
+                #{position},
+                #{logoImg}
+            )
+        </insert>
+</mapper>

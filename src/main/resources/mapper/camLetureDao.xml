@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.camLecture.dao.ICamLectureDao">
+
+    <select id="getCam" resultType="CamLecture" parameterType="CamLecture">
+    SELECT * from  camLeture_t WHERE address=#{address} and companyId=#{companyId}
+    </select>
+
+    <select id="getAllCam" resultType="CamLecture" parameterType="CamLecture">
+    SELECT * from camLeture_t WHERE  camDate>=#{camDate} AND city=#{city}
+    </select>
+
+    <select id="selectCam" resultType="CamLecture" parameterType="long">
+        SELECT * from camLeture_t WHERE  id=#{id}
+    </select>
+
+    <delete id="delete"  parameterType="long">
+        DELETE from camLeture_t WHERE  Id=#{id}
+    </delete>
+
+    <update id="update">
+      UPDATE camLeture_t SET
+          theme=#{theme},
+          content=#{content},
+          address=#{address},
+          camDate=#{camDate},
+          city=#{city},
+          position=#{position},
+          ref1=#{ref1}
+      WHERE id=#{id}
+    </update>
+
+    <insert id="insertCam">
+        INSERT INTO camLeture_t(
+            theme,
+            content,
+            address,
+            camDate,
+            companyId,
+            city,
+            position,
+            ref1
+        )VALUES (
+            #{theme},
+            #{content},
+            #{address},
+            #{camDate},
+            #{companyId},
+            #{city},
+            #{position},
+            #{ref1}
+
+        )
+    </insert>
+</mapper>
